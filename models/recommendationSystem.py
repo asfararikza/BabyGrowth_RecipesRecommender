@@ -3,10 +3,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load dataset
-url_dataset = 'https://raw.githubusercontent.com/asfararikza/BabyGrowth_RecipesRecommender/main/dataset_rekomen.csv'
+url_dataset = 'https://raw.githubusercontent.com/asfararikza/BabyGrowth_RecipesRecommender/main/Data/dataset_rekomen.csv'
 new_df = pd.read_csv(url_dataset)
 
-url_complete_dataset = 'https://raw.githubusercontent.com/asfararikza/dataset-mpasi/main/Data%20Resep.csv'
+url_complete_dataset = 'https://raw.githubusercontent.com/asfararikza/BabyGrowth_RecipesRecommender/main/Data/recipe_with_nutritions.csv'
 complete_df = pd.read_csv(url_complete_dataset)
 
 # Convert data into vectors
@@ -41,7 +41,7 @@ def recommend_recipe(id_resep, top_n=5):
 
     # Retrieve the recipe IDs using their index
     recipe_indices = [i[0] for i in top_recipe_scores]
-    recommended_recipe = new_df.iloc[recipe_indices][['id_resep', 'nama_resep']]
+    recommended_recipe = complete_df.iloc[recipe_indices][['id_resep', 'nama_resep','gambar','porsi','kategori','kalori','protein','lemak','karbo']]
 
     # Return the recommended recipe IDs along with their similarity scores
     recommendations = recommended_recipe.copy()
